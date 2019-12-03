@@ -1,0 +1,31 @@
+body{
+  font-family: helvetica;
+
+}
+#content{
+  display: block;
+  margin: 0 auto;
+  width: 500px;
+  text-align: center;
+}
+p{
+  font-size: 20px;
+  margin: 10px 0px 0px 0px;
+}
+#fileInput{
+  display: none;
+}
+input{
+  width: 150px;
+  height: 25px;
+}
+label{
+  font-size: 20px;
+  background-color: #0095FF;
+  border-radius: 10px;
+  padding: 10px;
+  width: 150px;
+  margin: 15px auto;
+  display: block;
+  color: white;
+}
