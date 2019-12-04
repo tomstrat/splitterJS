@@ -1,1 +1,1 @@
-# splitterJSPython Splitter Converted to JS
+Python Splitter Converted to JS
