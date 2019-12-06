@@ -16,12 +16,12 @@
     </div>
     <div id="results">
       <div id="resultsTop">
-        <a href="#">Email</a>
-        <a href="#">SMS</a>
-        <a href="#">Letter</a>
+        <a href="#" onclick="changeTab('dataEmail')">Email</a>
+        <a href="#" onclick="changeTab('dataSMS')">SMS</a>
+        <a href="#" onclick="changeTab('dataLetter')">Letter</a>
       </div>
       <div id="resultsBottom">
-        <table class="data dataEmail hideTable">
+        <table class="data hideTable" id="dataEmail">
           <tr class="row headRow">
             <td>Customer</td>
             <td>Email</td>
@@ -41,7 +41,7 @@
             <td>Year</td>
           </tr>
         </table>
-        <table class="data dataSMS hideTable">
+        <table class="data hideTable" id="dataSMS">
           <tr class="row headRow">
             <td>Number</td>
           </tr>
@@ -49,7 +49,7 @@
             <td>01928 447321</td>
           </tr>
         </table>
-        <table class="data dataLetter hideTable">
+        <table class="data hideTable" id="dataLetter">
             <tr class="row headRow">
               <td>Company</td>
               <td>Address</td>
