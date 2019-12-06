@@ -23,7 +23,7 @@ const AM_NUMBERS = {
     "Jacqui Lewis":"01179630014"
 };
 
-
+let mainData = [];
 
 //This section deals with reading in the CSV
 function handleFiles (files){
@@ -50,6 +50,12 @@ function handleFiles (files){
     processData(csv);
   }
   
+  function errorHandler(evt){
+    if(evt.target.error.name == "NotReadableError"){
+      alert("Cannot read file!");
+    }
+  }
+
   function processData(csv){
     var allTextLines = csv.split(/\r\n|\n/)
     for (var i=0; i<allTextLines.length; i++){
@@ -64,7 +70,7 @@ function handleFiles (files){
   }
 
 function mainReader(list){
-    for (i=0;i<list.length;i++){
+    for (i=1;i<list.length;i++){
 
         let hadEmail = false;
         let hadSMS = false;
@@ -85,6 +91,7 @@ function mainReader(list){
             }
         }
     }
+    changeTab("dataEmail");
 }
 
 // Check line is VIP
