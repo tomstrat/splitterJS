@@ -34,43 +34,52 @@ function handleFiles (files){
     } else {
       alert('The File APIs are not fully supported in this browser.');
     }
-  }
+}
   
-  function getAsText(fileToRead){
+function getAsText(fileToRead){
     var reader = new FileReader();
     // Read file into memory as UTF-8
     reader.readAsText(fileToRead);
     //Handle errors load
     reader.onload = loadHandler;
     reader.onerror = errorHandler;
-  }
-  
-  function loadHandler(event){
+}
+
+function loadHandler(event){
     var csv = event.target.result;
     processData(csv);
-  }
-  
-  function errorHandler(evt){
-    if(evt.target.error.name == "NotReadableError"){
-      alert("Cannot read file!");
-    }
-  }
+}
 
-  function processData(csv){
+function errorHandler(evt){
+    if(evt.target.error.name == "NotReadableError"){
+        alert("Cannot read file!");
+    }
+}
+
+function removeSlash(data){
+    let newData = [];
+    for(let i=0;i<data.length;i++){
+    newData.push(data[i].replace(/\"/g,""));
+    }
+    return newData;
+}
+
+function processData(csv){
     var allTextLines = csv.split(/\r\n|\n/)
-    for (var i=0; i<allTextLines.length; i++){
-      var data = allTextLines[i].split(',');
-      var tarr = [];
-      for (var j=0; j<data.length; j++){
-        tarr.push(data[j]);
-      }
-      mainData.push(tarr);
+    for (let i=0; i<allTextLines.length; i++){
+        var data = allTextLines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+        var newData = removeSlash(data);
+        var tarr = [];
+        for (var j=0; j<newData.length; j++){
+        tarr.push(newData[j]);
+        }
+        mainData.push(tarr);
     }
     mainReader(mainData);
-  }
+}
 
 function mainReader(list){
-    for (i=1;i<list.length;i++){
+    for (let i=1;i<list.length;i++){
 
         let hadEmail = false;
         let hadSMS = false;
@@ -78,7 +87,7 @@ function mainReader(list){
         if(checkVIP(list[i][0])){
             // Check if can receive email
             if(list[i][6] == "yes" && list[i][5] != ""){
-                writeEmail(list[i][0],list[i][5],list[i][8],AM_NUMBERS.list[i][8],makeAMEmail(list[i][8]));
+                writeEmail(list[i][0],list[i][5],list[i][8],AM_NUMBERS[list[i][8]],makeAMEmail(list[i][8]));
                 hadEmail = true;
             }
             // Check if can receive sms
@@ -96,7 +105,7 @@ function mainReader(list){
 
 // Check line is VIP
 function checkVIP(name){
-    for(i=0;1<VIP_NAMES;i++){
+    for(let i=0;1<VIP_NAMES;i++){
         if(name == VIP_NAMES[i]){
             return false;
         }
@@ -106,7 +115,7 @@ function checkVIP(name){
 
 // Check correct AM (replace if needed)
 function checkAM(am){
-    for(i=0;i<ACCOUNT_MANAGERS;i++){
+    for(let i=0;i<ACCOUNT_MANAGERS;i++){
         if(am == ACCOUNT_MANAGERS[i]){
             return am;
         }
