@@ -132,14 +132,24 @@ function makeAMEmail(am){
 // Functions to write rows to the tables
 function writeEmail (company,email,am,amNumber,amEmail){
     let emailTable = document.getElementById("dataEmail");
-    let newRow = document.createElement("tr").classList.add("row");
-    let companyCol = document.createElement("td").innerHTML(company);
-    let emailCol = document.createElement("td").innerHTML(email);
-    let amCol = document.createElement("td").innerHTML(am);
-    let amNumberCol = document.createElement("td").innerHTML(amNumber);
-    let amEmailCol = document.createElement("td").innerHTML(amEmail);
-    let bookCol = document.createElement("td").innerHTML(BOOK);
-    let yearCol = document.createElement("td").innerHTML(YEAR);
+    let newRow = document.createElement("tr");
+    let companyCol = document.createElement("td");
+    let emailCol = document.createElement("td");
+    let amCol = document.createElement("td");
+    let amNumberCol = document.createElement("td");
+    let amEmailCol = document.createElement("td");
+    let bookCol = document.createElement("td");
+    let yearCol = document.createElement("td");
+
+    newRow.classList.add("row");
+
+    companyCol.InnerHTML = company;
+    emailCol.InnerHTML = email;
+    amCol.InnerHTML = am;
+    amNumberCol.InnerHTML = amNumber;
+    amEmailCol.InnerHTML = amEmail;
+    bookCol.InnerHTML = BOOK;
+    yearCol.InnerHTML = YEAR;
 
     newRow.appendChild(companyCol);
     newRow.appendChild(emailCol);
@@ -154,8 +164,12 @@ function writeEmail (company,email,am,amNumber,amEmail){
 
 function writeNumber(number){
     let SMSTable = document.getElementById("dataSMS");
-    let newRow = document.createElement("tr").classList.add("row");
-    let numberCol = document.createElement("td").innerHTML(number);
+    let newRow = document.createElement("tr");
+    let numberCol = document.createElement("td");
+
+    newRow.classList.add("row");
+
+    numberCol.InnerHTML = number;
 
     newRow.appendChild(numberCol);
 
@@ -164,10 +178,16 @@ function writeNumber(number){
 
 function writeLetter(company, address, postcode){
     let letterTable = document.getElementById("dataLetter");
-    let newRow = document.createElement("tr").classList.add("row");
-    let companyCol = document.createElement("td").innerHTML(company);
-    let addressCol = document.createElement("td").innerHTML(address)
-    let postcodeCol = document.createElement("td").innerHTML(postcode)
+    let newRow = document.createElement("tr");
+    let companyCol = document.createElement("td");
+    let addressCol = document.createElement("td");
+    let postcodeCol = document.createElement("td");
+
+    newRow.classList.add("row");
+
+    companyCol.InnerHTML = company;
+    addressCol.InnerHTML = address;
+    postcodeCol.InnerHTML = postcode;
 
     newRow.appendChild(companyCol);
     newRow.appendChild(addressCol);
