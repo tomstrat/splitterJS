@@ -1,6 +1,4 @@
 
-const BOOK = document.getElementById("bookInput").value;
-const YEAR = document.getElementById("yearInput").value;
 
 const VIP_NAMES = ["Keytek", "The Aerial Man", "Digital TV", "Packsafe",
 "Salter Heating", "Wyedean Damp", "S H Badsey", "121 Boilers",
@@ -23,6 +21,7 @@ const AM_NUMBERS = {
     "Jacqui Lewis":"01179630014"
 };
 
+
 let mainData = [];
 
 //This section deals with reading in the CSV
@@ -35,7 +34,7 @@ function handleFiles (files){
       alert('The File APIs are not fully supported in this browser.');
     }
 }
-  
+
 function getAsText(fileToRead){
     var reader = new FileReader();
     // Read file into memory as UTF-8
@@ -75,6 +74,7 @@ function processData(csv){
         }
         mainData.push(tarr);
     }
+
     mainReader(mainData);
 }
 
@@ -87,7 +87,7 @@ function mainReader(list){
         if(checkVIP(list[i][0])){
             // Check if can receive email
             if(list[i][6] == "yes" && list[i][5] != ""){
-                writeEmail(list[i][0],list[i][5],list[i][8],AM_NUMBERS[list[i][8]],makeAMEmail(list[i][8]));
+                writeEmail(list[i][0],list[i][5],checkAM(list[i][8]),AM_NUMBERS[checkAM(list[i][8])],makeAMEmail(checkAM(list[i][8])));
                 hadEmail = true;
             }
             // Check if can receive sms
@@ -95,7 +95,7 @@ function mainReader(list){
                 writeNumber(list[i][3]);
                 hadSMS = true;
             }
-            if(hadEmail == true || hadSMS == true){
+            if(hadEmail == false && hadSMS == false){
                 writeLetter(list[i][0],list[i][1],list[i][2]);
             }
         }
@@ -105,7 +105,7 @@ function mainReader(list){
 
 // Check line is VIP
 function checkVIP(name){
-    for(let i=0;1<VIP_NAMES;i++){
+    for(let i=0;1<VIP_NAMES.length;i++){
         if(name == VIP_NAMES[i]){
             return false;
         }
@@ -115,7 +115,7 @@ function checkVIP(name){
 
 // Check correct AM (replace if needed)
 function checkAM(am){
-    for(let i=0;i<ACCOUNT_MANAGERS;i++){
+    for(let i=0;i<ACCOUNT_MANAGERS.length;i++){
         if(am == ACCOUNT_MANAGERS[i]){
             return am;
         }
@@ -126,11 +126,15 @@ function checkAM(am){
 // Make AM Email
 function makeAMEmail(am){
     let amSplit = am.split(" ");
-    return amSplit[0] + amSplit[1] + "@localpages.co.uk"; 
+    return amSplit[0] + amSplit[1] + "@localpages.co.uk";
 }
 
 // Functions to write rows to the tables
-function writeEmail (company,email,am,amNumber,amEmail){
+function writeEmail (company,email,am,amEmail,amNumber){
+
+    let BOOK = document.getElementById("bookInput").value;
+    let YEAR = document.getElementById("yearInput").value;
+
     let emailTable = document.getElementById("dataEmail");
     let newRow = document.createElement("tr");
     let companyCol = document.createElement("td");
@@ -143,13 +147,13 @@ function writeEmail (company,email,am,amNumber,amEmail){
 
     newRow.classList.add("row");
 
-    companyCol.InnerHTML = company;
-    emailCol.InnerHTML = email;
-    amCol.InnerHTML = am;
-    amNumberCol.InnerHTML = amNumber;
-    amEmailCol.InnerHTML = amEmail;
-    bookCol.InnerHTML = BOOK;
-    yearCol.InnerHTML = YEAR;
+    companyCol.innerHTML = company;
+    emailCol.innerHTML = email;
+    amCol.innerHTML = am;
+    amNumberCol.innerHTML = amNumber;
+    amEmailCol.innerHTML = amEmail;
+    bookCol.innerHTML = BOOK;
+    yearCol.innerHTML = YEAR;
 
     newRow.appendChild(companyCol);
     newRow.appendChild(emailCol);
@@ -169,7 +173,7 @@ function writeNumber(number){
 
     newRow.classList.add("row");
 
-    numberCol.InnerHTML = number;
+    numberCol.innerHTML = number;
 
     newRow.appendChild(numberCol);
 
@@ -185,9 +189,9 @@ function writeLetter(company, address, postcode){
 
     newRow.classList.add("row");
 
-    companyCol.InnerHTML = company;
-    addressCol.InnerHTML = address;
-    postcodeCol.InnerHTML = postcode;
+    companyCol.innerHTML = company;
+    addressCol.innerHTML = address;
+    postcodeCol.innerHTML = postcode;
 
     newRow.appendChild(companyCol);
     newRow.appendChild(addressCol);
