@@ -2,7 +2,7 @@
 
 const VIP_NAMES = ["Keytek", "The Aerial Man", "Digital TV", "Packsafe",
 "Salter Heating", "Wyedean Damp", "S H Badsey", "121 Boilers",
-"The Monmouthshire Window", "Monmouth Conservatories", "CGS",
+"The Monmouthshire Window Company", "Monmouthshire Conservatory Company", "CGS",
  "L Miles", "LEL Scaffolding", "Yate Windows"];
 
 const ACCOUNT_MANAGERS = ["Jane Eveleigh", "Sam Bray", "Matthew Rose",
@@ -105,7 +105,7 @@ function mainReader(list){
 
 // Check line is VIP
 function checkVIP(name){
-    for(let i=0;1<VIP_NAMES.length;i++){
+    for(let i=0;i<VIP_NAMES.length;i++){
         if(name == VIP_NAMES[i]){
             return false;
         }
